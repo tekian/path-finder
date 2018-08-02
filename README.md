@@ -1,6 +1,6 @@
 # Path Finder
 
-Path Finder is a visualization tool to show how different search algorithms work. I've created it while studying course _Intro to Artificial Intelligence_ (https://classroom.udacity.com/courses/cs271). UI is built on Kivy framework (https://kivy.org/#home).
+Path Finder is a visualization tool to demonstrate how different search algorithms work. I've created it while studying course _Intro to Artificial Intelligence_ (https://classroom.udacity.com/courses/cs271). UI is built on Kivy framework (https://kivy.org/#home).
 
 ## Installation
 
@@ -50,4 +50,4 @@ Last but not least, you can control _Show options_ of nodes and edges at any tim
 
 ## Contributions
 
-I'm open to contributions which extend and/or improve the code. If you have time, passion and idea, go ahead and create PR.
+Contributions are welcome. If you have time, passion and idea, go ahead and create a pull request.
