@@ -1,0 +1,13 @@
+<EdgeWidget>:
+    canvas.before:
+        Color:
+            rgba: self._color
+        Line:
+            points: self._points
+            width: self._width
+
+    InputLabel:
+        pos: root._x1 + (root._x2 - root._x1)/2 - 10, root._y1 + (root._y2 - root._y1)/2 - 10
+        text: root._cost
+        disabled: root._cost_disabled
+        disabled_color: [0, 0, 0, 0]

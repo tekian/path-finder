@@ -1,0 +1,10 @@
+kivy==1.10.0
+kivy.deps.sdl2==0.1.17
+kivy.deps.angle==0.1.6
+kivy.deps.glew==0.1.9
+pypiwin32==223
+cyrusbus==0.1.0
+heapdict==1.0.0
+funcy==1.10.3
+networkx==2.1
+traitlets==4.3.2

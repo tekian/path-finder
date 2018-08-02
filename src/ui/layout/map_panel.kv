@@ -1,0 +1,127 @@
+<MapPanel>:
+    cols: 1
+    rows: 6
+
+    Title:
+        text: "Map"
+        disabled: bool(root._display_state <= 1)
+
+    TabbedPanel:
+        id: tabbed_panel
+        disabled: bool(root._display_state <= 1)
+        do_default_tab: False
+        tab_height: 32
+        tab_width: 260/2
+
+        TabbedPanelItem:
+            text: "Grid Map"
+
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: root._background_color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                cols: 1
+                rows: 3
+
+                size: 260, 96
+                size_hint: None, None
+
+                InputLineLayout:
+                    InputLabel:
+                        text: "X Size"
+                    InputText:
+                        text: root._grid_x_size
+                        on_text: root._grid_x_size = self.text
+
+                InputLineLayout:
+                    InputLabel:
+                        text: "Y Size"
+                    InputText:
+                        text: root._grid_y_size
+                        on_text: root._grid_y_size = self.text
+
+                InputLineLayout:
+                    InputLabel:
+                        text: "Edges keep %"
+                    InputText:
+                        text: root._grid_edges_keep
+                        on_text: root._grid_edges_keep = self.text
+
+        TabbedPanelItem:
+            text: "File Spring Map"
+
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: root._background_color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                size: 260, 96
+                size_hint: None, None
+
+                cols: 1
+                rows: 2
+
+                InputLineLayout:
+                    InputLabel:
+                        text: "Distortion level"
+                    InputText:
+                        text: root._json_distortion_level
+                        on_text: root._json_distortion_level = self.text
+
+                InputLineLayout:
+                    InputLabel:
+                        text: "File"
+                    InputText:
+                        text: root._json_map_path
+                        on_text: root._json_map_path = self.text
+
+
+    InputLineLayout:
+        padding: [5, 10, 0, 0]
+        InputLabel:
+            text: "Show node labels"
+            height: 20
+        Switch:
+            active: root._show_node_labels
+            on_active: root._show_node_labels = not root._show_node_labels
+
+    InputLineLayout:
+        InputLabel:
+            text: "Show node costs"
+        Switch:
+            active: root._show_node_costs
+            on_active: root._show_node_costs = not root._show_node_costs
+
+    InputLineLayout:
+        padding: [5, 0, 0, 5]
+        InputLabel:
+            text: "Show edge costs"
+        Switch:
+            active: root._show_edge_costs
+            on_active: root._show_edge_costs = not root._show_edge_costs
+
+    GridLayout:
+        size: root.size[0], 48
+        size_hint: None, None
+
+        cols: 2
+        rows: 1
+
+        RectangleButton:
+            disabled: bool(root._display_state <= 1)
+            text: "Load"
+            height: 48
+            on_press: root.load_map(map_name=tabbed_panel.current_tab.text)
+
+        RectangleButton:
+            disabled: bool(root._display_state in [0, 2])
+            text: "Reset"
+            height: 48
+            on_press: root.reset_map()

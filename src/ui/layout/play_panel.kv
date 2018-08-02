@@ -1,0 +1,72 @@
+<PlayPanel>:
+    cols: 1
+    rows: 6
+
+    Title:
+        id: play_label
+        disabled: bool(root._display_state <= 1)
+        text: "Play"
+
+    InputLineLayout:
+        padding: [5, 0, 0, 10]
+        size: 260, 32 + 10
+
+        InputLabel:
+            id: continuous_label
+            disabled: bool(root._display_state <= 1)
+            text: "Continuous"
+
+        Switch:
+            id: continuous_switch
+            disabled: bool(root._display_state <= 1)
+            active: root._is_continuous
+            on_active: root._is_continuous = continuous_switch.active
+
+    InputLabel:
+        text: "Step play"
+        height: 20
+        disabled: bool(root._display_state <= 1) or root._is_continuous
+
+    GridLayout:
+        size: root.width, 48 + 10
+        size_hint: None, None
+        padding: [0, 0, 0, 10]
+
+        cols: 1
+        rows: 1
+
+        RectangleButton:
+            id: step_button
+            size: 260, 48
+            disabled: bool(root._display_state <= 1) or root._is_continuous
+            text: "Step"
+            on_press: root.make_a_step()
+
+    InputLabel:
+        text: "Continuous play"
+        height: 20
+        disabled: bool(root._display_state <= 1) or not root._is_continuous
+
+    GridLayout:
+        size: root.width, 48
+        size_hint: None, None
+        padding: [0, 0, 0, 0]
+
+        cols: 2
+        rows: 1
+
+        Slider:
+            size: root.width - play_button.width, 48
+            size_hint: None, None
+            disabled: bool(root._display_state <= 1) or not root._is_continuous
+            min: 1
+            max: 20
+            on_value: root._playback_speed = self.value
+            value: root._playback_speed
+
+        RectangleButton:
+            id: play_button
+            size: 64, 48
+            disabled: bool(root._display_state <= 1) or not root._is_continuous
+            text: "Stop" if root._is_running else "Play"
+            on_press: root.toggle_play()

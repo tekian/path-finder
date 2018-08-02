@@ -1,0 +1,97 @@
+<SearchPanel>:
+    cols: 1
+    rows: 5
+
+    Title:
+        text: "Search"
+        disabled: bool(root._display_state <= 1)
+
+    InputLineLayout:
+        InputLabel:
+            id: from_node_label
+            disabled: bool(root._display_state <= 1)
+            text: "From node"
+
+        InputSpinner:
+            id: from_node_spinner
+            disabled: bool(root._display_state <= 1)
+            text: root._from_node
+            on_text: root.reselect_from_node(from_node_spinner.text)
+            values: root._from_node_list
+
+    InputLineLayout:
+        InputLabel:
+            id: to_node_label
+            disabled: bool(root._display_state <= 1)
+            text: "To node"
+
+        InputSpinner:
+            id: to_node_spinner
+            disabled: bool(root._display_state <= 1)
+            text: root._to_node
+            on_text: root.reselect_to_node(to_node_spinner.text)
+            values: root._to_node_list
+
+    GridLayout:
+        size: 260, 32
+
+        cols: 4
+        rows: 1
+
+        InputToggle:
+            id: dijkstra_toggle
+            text: "Dijkstra"
+            group: "algorithms"
+            state: "normal" if root._algorithm_toggle else "normal"
+            on_state: root._is_ready = True
+            disabled: bool(root._display_state <= 1)
+
+        InputToggle:
+            id: a_star_toggle
+            text: "A*"
+            group: "algorithms"
+            state: "normal" if root._algorithm_toggle else "normal"
+            on_state: root._is_ready = True
+            disabled: bool(root._display_state <= 1)
+
+        InputToggle:
+            id: greedy_toggle
+            text: "Greedy"
+            group: "algorithms"
+            state: "normal" if root._algorithm_toggle else "normal"
+            on_state: root._is_ready = True
+            disabled: bool(root._display_state <= 1)
+
+        InputToggle:
+            id: bfs_toggle
+            text: "BFS"
+            group: "algorithms"
+            state: "normal" if root._algorithm_toggle else "normal"
+            on_state: root._is_ready = True
+            disabled: bool(root._display_state <= 1)
+
+    GridLayout:
+        size: root.size[0], search_load_button.size[1]
+        size_hint: None, None
+
+        cols: 2
+        rows: 1
+
+        RectangleButton:
+            id: search_load_button
+            height: 48
+            disabled: bool(root._display_state <= 1) or not bool(root._is_ready)
+            text: "Load"
+            on_press:
+                root.load_search_settings(
+                dijkstra=dijkstra_toggle.state,
+                a_star=a_star_toggle.state,
+                greedy=greedy_toggle.state,
+                bfs=bfs_toggle.state)
+
+        RectangleButton:
+            id: search_reset_button
+            height: 48
+            disabled: bool(root._display_state in [0, 2])
+            text: "Reset"
+            on_press: root.reset_search_settings()

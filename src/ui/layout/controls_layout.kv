@@ -1,0 +1,79 @@
+#:include ui/layout/map_panel.kv
+#:include ui/layout/search_panel.kv
+#:include ui/layout/play_panel.kv
+
+<ControlsLayout>:
+    cols: 1
+    rows: 5
+    spacing: 6
+
+    MapPanel:
+        id: map_panel
+        size: 260, 325
+        size_hint: None, None
+        padding: [10, 5, 10, 15]
+
+        canvas.before:
+            BorderImage:
+                source: self._panel_border
+                pos: self.x, self.y - 5
+                size: self.width + 20, self.height + 5
+
+            Color:
+                rgba: self._background_color
+            Rectangle:
+                pos: self.x + 2, self.y - 2
+                size: self.width + 16, self.height
+
+    SearchPanel:
+        id: search_panel
+        size: 260, 200
+        size_hint: None, None
+        padding: [10, 5, 10, 15]
+
+        canvas.before:
+            BorderImage:
+                source: self._panel_border
+                pos: self.x, self.y - 5
+                size: self.width + 20, self.height + 5
+
+            Color:
+                rgba: self._background_color
+            Rectangle:
+                pos: self.x + 2, self.y - 2
+                size: self.width + 16, self.height
+
+    PlayPanel:
+        id: play_panel
+        size:
+            260, 780 - search_panel.height - \
+            map_panel.height - 18
+
+        size_hint: None, None
+        padding: [10, 5, 10, 15]
+
+        canvas.before:
+            BorderImage:
+                source: self._panel_border
+                pos: self.x, self.y - 5
+                size: self.width + 20, self.height + 5
+
+            Color:
+                rgba: self._background_color
+            Rectangle:
+                pos: self.x + 2, self.y - 2
+                size: self.width + 16, self.height
+
+    GridLayout:
+        size:
+            260, root.height - search_panel.height - \
+            map_panel.height - play_panel.height
+
+        size_hint: None, None
+
+        canvas.before:
+            Color:
+                rgba: [.10, .10, .10, 1]
+            Rectangle:
+                pos: self.x, self.y
+                size: self.width + 20, self.height

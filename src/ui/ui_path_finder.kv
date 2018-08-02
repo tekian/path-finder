@@ -1,0 +1,82 @@
+#:include ui/layout/controls_layout.kv
+#:include ui/layout/plot_layout.kv
+
+<InputLabel@Label>:
+    size: 155, 32
+    size_hint: None, None
+    text_size: self.size
+    font_size: '12sp'
+    halign: 'left'
+    valign: 'middle'
+
+<InputText@TextInput>:
+    size: 100, 32
+    size_hint: None, None
+    font_size: '12sp'
+    write_tab: False
+    multiline: False
+
+<Title@Label>:
+    size: 260, 32
+    size_hint: None, None
+    text_size: self.size
+    font_size: '19sp'
+    font_hinting: 'normal'
+    halign: 'left'
+    valign: 'middle'
+
+<SquareButton@Button>:
+    font_size: '14sp'
+    size: 65, 50
+    size_hint: None, None
+
+<RectangleButton@Button>:
+    font_size: '14sp'
+    size: 130, 32
+    size_hint: None, None
+
+<InputToggle@ToggleButton>:
+    font_size: '14sp'
+    size: 65, 32
+    size_hint: None, None
+
+<InputLineLayout@BoxLayout>:
+    orientation: "horizontal"
+    size: 260, 32
+    size_hint: None, None
+    padding: [5, 0, 0, 0]
+
+<InputSpinner@Spinner>:
+    sync_height: True
+    size: 100, 30
+    size_hint: None, None
+
+<Header@BoxLayout>:
+    size: root.size[0], 5
+    size_hint: None, None
+
+<Footer@BoxLayout>:
+    size: 260, 25
+    size_hint: None, None
+
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<UiPathFinder>:
+    GridLayout:
+        cols: 2
+        rows: 1
+
+        ControlsLayout:
+            size: 260, root.size[1]
+            size_hint: None, None
+
+        PlotLayout:
+            size: root.size[0]-260, root.size[1]
+            size_hint: None, None
+            auto_bring_to_front: False
+            opacity: 1.0

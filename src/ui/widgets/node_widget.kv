@@ -1,0 +1,26 @@
+<NodeWidget>:
+    canvas.before:
+        Color:
+            rgba: self._hl_color
+        Rectangle:
+            pos: (self._pos_x - 5, self._pos_y - 5)
+            size: (self._size + 10, self._size + 10)
+
+    canvas.after:
+        Color:
+            rgba: self._color
+        Rectangle:
+            pos: self._pos_x, self._pos_y
+            size: (self._size, self._size)
+
+    InputLabel:
+        pos: root._pos_x - len(self.text) + 2.5, root._pos_y + 12.5
+        text: root._name
+        disabled: root._name_disabled
+        disabled_color: [0, 0, 0, 0]
+
+    InputLabel:
+        pos: root._pos_x - len(self.text) + 2.5 , root._pos_y - root._size - 4.5
+        text: root._cost
+        disabled: root._cost_disabled
+        disabled_color: [0, 0, 0, 0]
