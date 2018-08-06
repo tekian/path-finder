@@ -16,8 +16,8 @@ class FileSpringMapSpaceFactory(MapSpaceFactoryType):
         self._json_map = json_map
         self._spring_iterations = spring_iterations
 
-        self._nodes_by_name: Dict[str, MapNode] = {}
-        self._edges_by_pair: Dict[Tuple[MapNode, MapNode], MapEdge] = {}
+        self._map_nodes: Dict[str, MapNode] = {}
+        self._map_edges: Dict[Tuple[MapNode, MapNode], MapEdge] = {}
 
     def generate_nodes(self) -> List[MapNode]:
         graph = nx.Graph()
@@ -35,27 +35,27 @@ class FileSpringMapSpaceFactory(MapSpaceFactoryType):
             pos_x = float((0.45 + position[0] * 0.45))
             pos_y = float((0.45 + position[1] * 0.45))
 
-            self._nodes_by_name[node] = MapNode(node, (pos_x, pos_y))
+            self._map_nodes[node] = MapNode(node, (pos_x, pos_y))
 
-        return list(self._nodes_by_name.values())
+        return list(self._map_nodes.values())
 
     def generate_edges(self) -> List[MapEdge]:
         for node_name, peers in self._json_map.items():
             for peer_cost_pair in peers:
                 peer_name, cost = list(peer_cost_pair.items())[0]
 
-                _1 = self._nodes_by_name[node_name]
-                _2 = self._nodes_by_name[peer_name]
+                _1 = self._map_nodes[node_name]
+                _2 = self._map_nodes[peer_name]
 
-                if (_2, _1) in self._edges_by_pair.keys():
+                if (_2, _1) in self._map_edges.keys():
                     continue  # Skip duplicates
 
-                self._edges_by_pair[(_1, _2)] = MapEdge((_1, _2), cost)
+                self._map_edges[(_1, _2)] = MapEdge((_1, _2), cost)
 
-        return list(self._edges_by_pair.values())
+        return list(self._map_edges.values())
 
     def generate_defaults(self) -> Tuple[MapNode, MapNode]:
-        from_node = self._nodes_by_name["Arad"]
-        to_node = self._nodes_by_name["Bucharest"]
+        from_node = self._map_nodes["Arad"]
+        to_node = self._map_nodes["Bucharest"]
 
         return from_node, to_node
