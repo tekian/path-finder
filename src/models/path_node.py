@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# pylint: disable=R0902
-
 from typing import Any
 from typing import Optional
 
