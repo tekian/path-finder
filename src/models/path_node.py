@@ -17,10 +17,10 @@ class PathNode(MapNode, HasTraits):
 
     is_final = Bool(False)
 
+    cost = Float(.0)
+
     is_from = Bool(False)
     is_to = Bool(False)
-
-    cost = Float(.0)
 
     def __init__(self, map_node: MapNode) -> None:
         super().__init__(map_node.name, map_node.position)
