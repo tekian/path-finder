@@ -25,11 +25,6 @@
     halign: 'left'
     valign: 'middle'
 
-<SquareButton@Button>:
-    font_size: '14sp'
-    size: 65, 50
-    size_hint: None, None
-
 <RectangleButton@Button>:
     font_size: '14sp'
     size: 130, 32
@@ -50,21 +45,6 @@
     sync_height: True
     size: 100, 30
     size_hint: None, None
-
-<Header@BoxLayout>:
-    size: root.size[0], 5
-    size_hint: None, None
-
-<Footer@BoxLayout>:
-    size: 260, 25
-    size_hint: None, None
-
-    canvas.before:
-        Color:
-            rgba: (0, 0, 0, 1)
-        Rectangle:
-            pos: self.pos
-            size: self.size
 
 <UiPathFinder>:
     GridLayout:
